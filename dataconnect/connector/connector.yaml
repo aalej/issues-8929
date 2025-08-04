@@ -1,0 +1,9 @@
+connectorId: default
+generate:
+  javascriptSdk:
+    outputDir: ../../dataconnect-generated/js
+    package: '@movies/dataconnect'
+    packageJsonDir: ../..
+    react: true
+  llmTools:
+    outputFile: ../../dataconnect-generated/tools.json

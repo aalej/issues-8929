@@ -1,0 +1,35 @@
+# mutation Example($id: String) @auth(level: NO_ACCESS) @transaction {
+#   productTag_deleteMany(where: { productId: { eq: $id } })
+
+#   product_upsert(
+#     data: {
+#       id: $id
+#       name: "Dummy Product"
+#       type: "DIGITAL"
+#       active: true
+#       createdAt: "2025-05-27T10:00:00Z"
+#       updatedAt: "2025-05-27T10:00:00Z"
+#       language: "en"
+#       publicationDate: "2025-06-01"
+#       metadataStatus: "Draft"
+#     }
+#   )
+
+#   productCategory_insertMany(data: [{ productId: $id, categoryCode: "ABC123" }])
+# }
+
+# mutation CreateProduct($id: String) @auth(level: NO_ACCESS) {
+#   product_insert(
+#     data: {
+#       id: $id
+#       active: false
+#       createdAt: "2025-05-29T14:13:23.004Z"
+#       language: ""
+#       metadataStatus: ""
+#       name: ""
+#       publicationDate: ""
+#       type: ""
+#       updatedAt: "2025-05-29T14:13:23.004Z"
+#     }
+#   )
+# }

@@ -1,0 +1,7 @@
+query ListEverything @auth(level: PUBLIC) {
+  movies {
+    id
+    originalLanguage
+    availableLanguages
+  }
+}

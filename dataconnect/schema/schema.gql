@@ -1,0 +1,17 @@
+enum Language {
+  ENGLISH
+  FRENCH
+  SPANISH
+  GERMAN
+  JAPANESE
+  "Languages not defined above"
+  OTHER_LANGUAGES
+}
+
+type Movie @table {
+  title: String!
+  genre: String
+  description: String
+  originalLanguage: Language! @default(value: ENGLISH)
+  availableLanguages: [Language!]
+}

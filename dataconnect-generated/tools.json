@@ -1,0 +1,12 @@
+{
+  "connector": "default",
+  "location": "us-central1",
+  "service": "test-dc-2",
+  "tools": [
+    {
+      "name": "ListEverything",
+      "type": "query",
+      "parameters": null
+    }
+  ]
+}
