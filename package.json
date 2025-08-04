@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@movies/dataconnect": "file:dataconnect-generated/js",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
