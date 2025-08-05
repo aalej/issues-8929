@@ -26,3 +26,14 @@ export function listEverything(dc) {
   return executeQuery(listEverythingRef(dc));
 }
 
+export const filterMoviesRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'FilterMovies', inputVars);
+}
+filterMoviesRef.operationName = 'FilterMovies';
+
+export function filterMovies(dcOrVars, vars) {
+  return executeQuery(filterMoviesRef(dcOrVars, vars));
+}
+

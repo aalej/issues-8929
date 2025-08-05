@@ -87,6 +87,10 @@ input Movie_Data {
   """
   id_expr: UUID_Expr
   """
+  ✨ Generated from Field `Movie`.`availableLanguages` of type `[Language!]`
+  """
+  availableLanguages: [Language!]
+  """
   ✨ Generated from Field `Movie`.`description` of type `String`
   """
   description: String
@@ -102,6 +106,10 @@ input Movie_Data {
   ✨ `_expr` server value variant of `genre` (✨ Generated from Field `Movie`.`genre` of type `String`)
   """
   genre_expr: String_Expr
+  """
+  ✨ Generated from Field `Movie`.`originalLanguage` of type `Language!`
+  """
+  originalLanguage: Language
   """
   ✨ Generated from Field `Movie`.`title` of type `String!`
   """
@@ -132,6 +140,10 @@ input Movie_Filter {
   """
   id: UUID_Filter
   """
+  ✨ Generated from Field `Movie`.`availableLanguages` of type `[Language!]`
+  """
+  availableLanguages: Language_ListFilter
+  """
   ✨ Generated from Field `Movie`.`description` of type `String`
   """
   description: String_Filter
@@ -139,6 +151,10 @@ input Movie_Filter {
   ✨ Generated from Field `Movie`.`genre` of type `String`
   """
   genre: String_Filter
+  """
+  ✨ Generated from Field `Movie`.`originalLanguage` of type `Language!`
+  """
+  originalLanguage: Language_Filter
   """
   ✨ Generated from Field `Movie`.`title` of type `String!`
   """
@@ -244,6 +260,10 @@ input Movie_Order {
   ✨ Generated from Field `Movie`.`genre` of type `String`
   """
   genre: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`originalLanguage` of type `Language!`
+  """
+  originalLanguage: OrderDirection
   """
   ✨ Generated from Field `Movie`.`title` of type `String!`
   """

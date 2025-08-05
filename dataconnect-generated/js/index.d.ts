@@ -19,6 +19,18 @@ export enum Language {
 
 
 
+export interface FilterMoviesData {
+  movies: ({
+    id: UUIDString;
+    originalLanguage: Language;
+    availableLanguages?: Language[] | null;
+  } & Movie_Key)[];
+}
+
+export interface FilterMoviesVariables {
+  originalLanguage?: Language | null;
+}
+
 export interface ListEverythingData {
   movies: ({
     id: UUIDString;
@@ -43,4 +55,16 @@ export const listEverythingRef: ListEverythingRef;
 
 export function listEverything(): QueryPromise<ListEverythingData, undefined>;
 export function listEverything(dc: DataConnect): QueryPromise<ListEverythingData, undefined>;
+
+interface FilterMoviesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars?: FilterMoviesVariables): QueryRef<FilterMoviesData, FilterMoviesVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars?: FilterMoviesVariables): QueryRef<FilterMoviesData, FilterMoviesVariables>;
+  operationName: string;
+}
+export const filterMoviesRef: FilterMoviesRef;
+
+export function filterMovies(vars?: FilterMoviesVariables): QueryPromise<FilterMoviesData, FilterMoviesVariables>;
+export function filterMovies(dc: DataConnect, vars?: FilterMoviesVariables): QueryPromise<FilterMoviesData, FilterMoviesVariables>;
 

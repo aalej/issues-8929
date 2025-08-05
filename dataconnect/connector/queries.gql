@@ -5,3 +5,11 @@ query ListEverything @auth(level: PUBLIC) {
     availableLanguages
   }
 }
+
+query FilterMovies($originalLanguage: Language) @auth(level: PUBLIC) {
+  movies(where: { originalLanguage: { eq: $originalLanguage } }) {
+    id
+    originalLanguage
+    availableLanguages
+  }
+}

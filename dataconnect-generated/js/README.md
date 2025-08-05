@@ -11,6 +11,7 @@ This README will guide you through the process of using the generated JavaScript
   - [*Connecting to the local Emulator*](#connecting-to-the-local-emulator)
 - [**Queries**](#queries)
   - [*ListEverything*](#listeverything)
+  - [*FilterMovies*](#filtermovies)
 - [**Mutations**](#mutations)
 
 # Accessing the connector
@@ -139,6 +140,123 @@ const ref = listEverythingRef();
 // You can also pass in a `DataConnect` instance to the `QueryRef` function.
 const dataConnect = getDataConnect(connectorConfig);
 const ref = listEverythingRef(dataConnect);
+
+// Call `executeQuery()` on the reference to execute the query.
+// You can use the `await` keyword to wait for the promise to resolve.
+const { data } = await executeQuery(ref);
+
+console.log(data.movies);
+
+// Or, you can use the `Promise` API.
+executeQuery(ref).then((response) => {
+  const data = response.data;
+  console.log(data.movies);
+});
+```
+
+## FilterMovies
+You can execute the `FilterMovies` query using the following action shortcut function, or by calling `executeQuery()` after calling the following `QueryRef` function, both of which are defined in [js/index.d.ts](./index.d.ts):
+```typescript
+filterMovies(vars?: FilterMoviesVariables): QueryPromise<FilterMoviesData, FilterMoviesVariables>;
+
+interface FilterMoviesRef {
+  ...
+  /* Allow users to create refs without passing in DataConnect */
+  (vars?: FilterMoviesVariables): QueryRef<FilterMoviesData, FilterMoviesVariables>;
+}
+export const filterMoviesRef: FilterMoviesRef;
+```
+You can also pass in a `DataConnect` instance to the action shortcut function or `QueryRef` function.
+```typescript
+filterMovies(dc: DataConnect, vars?: FilterMoviesVariables): QueryPromise<FilterMoviesData, FilterMoviesVariables>;
+
+interface FilterMoviesRef {
+  ...
+  (dc: DataConnect, vars?: FilterMoviesVariables): QueryRef<FilterMoviesData, FilterMoviesVariables>;
+}
+export const filterMoviesRef: FilterMoviesRef;
+```
+
+If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the filterMoviesRef:
+```typescript
+const name = filterMoviesRef.operationName;
+console.log(name);
+```
+
+### Variables
+The `FilterMovies` query has an optional argument of type `FilterMoviesVariables`, which is defined in [js/index.d.ts](./index.d.ts). It has the following fields:
+
+```typescript
+export interface FilterMoviesVariables {
+  originalLanguage?: Language | null;
+}
+```
+### Return Type
+Recall that executing the `FilterMovies` query returns a `QueryPromise` that resolves to an object with a `data` property.
+
+The `data` property is an object of type `FilterMoviesData`, which is defined in [js/index.d.ts](./index.d.ts). It has the following fields:
+```typescript
+export interface FilterMoviesData {
+  movies: ({
+    id: UUIDString;
+    originalLanguage: Language;
+    availableLanguages?: Language[] | null;
+  } & Movie_Key)[];
+}
+```
+### Using `FilterMovies`'s action shortcut function
+
+```typescript
+import { getDataConnect } from 'firebase/data-connect';
+import { connectorConfig, filterMovies, FilterMoviesVariables } from '@movies/dataconnect';
+
+// The `FilterMovies` query has an optional argument of type `FilterMoviesVariables`:
+const filterMoviesVars: FilterMoviesVariables = {
+  originalLanguage: ..., // optional
+};
+
+// Call the `filterMovies()` function to execute the query.
+// You can use the `await` keyword to wait for the promise to resolve.
+const { data } = await filterMovies(filterMoviesVars);
+// Variables can be defined inline as well.
+const { data } = await filterMovies({ originalLanguage: ..., });
+// Since all variables are optional for this query, you can omit the `FilterMoviesVariables` argument.
+const { data } = await filterMovies();
+
+// You can also pass in a `DataConnect` instance to the action shortcut function.
+const dataConnect = getDataConnect(connectorConfig);
+const { data } = await filterMovies(dataConnect, filterMoviesVars);
+
+console.log(data.movies);
+
+// Or, you can use the `Promise` API.
+filterMovies(filterMoviesVars).then((response) => {
+  const data = response.data;
+  console.log(data.movies);
+});
+```
+
+### Using `FilterMovies`'s `QueryRef` function
+
+```typescript
+import { getDataConnect, executeQuery } from 'firebase/data-connect';
+import { connectorConfig, filterMoviesRef, FilterMoviesVariables } from '@movies/dataconnect';
+
+// The `FilterMovies` query has an optional argument of type `FilterMoviesVariables`:
+const filterMoviesVars: FilterMoviesVariables = {
+  originalLanguage: ..., // optional
+};
+
+// Call the `filterMoviesRef()` function to get a reference to the query.
+const ref = filterMoviesRef(filterMoviesVars);
+// Variables can be defined inline as well.
+const ref = filterMoviesRef({ originalLanguage: ..., });
+// Since all variables are optional for this query, you can omit the `FilterMoviesVariables` argument.
+const ref = filterMoviesRef();
+
+// You can also pass in a `DataConnect` instance to the `QueryRef` function.
+const dataConnect = getDataConnect(connectorConfig);
+const ref = filterMoviesRef(dataConnect, filterMoviesVars);
 
 // Call `executeQuery()` on the reference to execute the query.
 // You can use the `await` keyword to wait for the promise to resolve.
